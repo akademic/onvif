@@ -1,6 +1,7 @@
 package onvif
 
 import (
+	"context"
 	"encoding/xml"
 	"errors"
 	"io/ioutil"
@@ -278,10 +279,10 @@ func (dev Device) callMethodDo(endpoint string, method interface{}) (*http.Respo
 	soap.AddRootNamespaces(Xlmns)
 	soap.AddAction()
 
-	//Auth Handling
+	// Auth Handling
 	if dev.params.Username != "" && dev.params.Password != "" {
 		soap.AddWSSecurity(dev.params.Username, dev.params.Password)
 	}
 
-	return networking.SendSoap(dev.params.HttpClient, endpoint, soap.String())
+	return networking.SendSoap(context.TODO(), dev.params.HttpClient, endpoint, soap.String())
 }
