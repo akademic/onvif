@@ -2,16 +2,22 @@ package networking
 
 import (
 	"bytes"
+	"context"
+	"fmt"
 	"net/http"
-
-	"github.com/juju/errors"
 )
 
 // SendSoap send soap message
-func SendSoap(httpClient *http.Client, endpoint, message string) (*http.Response, error) {
-	resp, err := httpClient.Post(endpoint, "application/soap+xml; charset=utf-8", bytes.NewBufferString(message))
+func SendSoap(ctx context.Context, httpClient *http.Client, endpoint, message string) (*http.Response, error) {
+	req, err := http.NewRequestWithContext(ctx, "POST", endpoint, bytes.NewBufferString(message))
 	if err != nil {
-		return resp, errors.Annotate(err, "Post")
+		return nil, fmt.Errorf("NewRequestWithContext: %w", err)
+	}
+
+	req.Header.Set("Content-Type", "application/soap+xml; charset=utf-8")
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return resp, fmt.Errorf("Post: %w", err)
 	}
 
 	return resp, nil
