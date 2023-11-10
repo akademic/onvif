@@ -10,7 +10,7 @@ import (
 )
 
 func ReadAndParse(ctx context.Context, httpReply *http.Response, reply interface{}, tag string) error {
-	defaultLogger.Debug("action=%s msg=\"%s\" status=%s", tag, httpReply.Status, httpReply.StatusCode)
+	defaultLogger.Debug("action=%s msg=\"%s\" status=%d", tag, httpReply.Status, httpReply.StatusCode)
 
 	b, err := ioutil.ReadAll(httpReply.Body)
 	if err != nil {
