@@ -1183,11 +1183,11 @@ type ScopeDefinition xsd.String
 type DiscoveryMode xsd.String
 
 type NetworkHost struct {
-	Type        NetworkHostType      `xml:"onvif:Type"`
-	IPv4Address IPv4Address          `xml:"onvif:IPv4Address"`
-	IPv6Address IPv6Address          `xml:"onvif:IPv6Address"`
-	DNSname     DNSName              `xml:"onvif:DNSname"`
-	Extension   NetworkHostExtension `xml:"onvif:Extension"`
+	Type        NetworkHostType      `xml:"Type"`
+	IPv4Address IPv4Address          `xml:"IPv4Address"`
+	IPv6Address IPv6Address          `xml:"IPv6Address"`
+	DNSname     DNSName              `xml:"DNSname"`
+	Extension   NetworkHostExtension `xml:"Extension"`
 }
 
 type NetworkHostType xsd.String
